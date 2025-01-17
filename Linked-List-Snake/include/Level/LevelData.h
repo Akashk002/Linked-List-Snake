@@ -5,7 +5,6 @@ namespace Level
 {
 	struct LevelData
 	{
-
 		LevelData(LevelNumber ind)
 		{
 			level_index = ind;

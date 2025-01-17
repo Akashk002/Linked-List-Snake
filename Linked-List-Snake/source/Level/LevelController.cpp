@@ -35,6 +35,7 @@ namespace Level
 	{
 		delete(level_model);
 		delete(level_view);
+
 	}
 
 	float LevelController::getCellWidth()

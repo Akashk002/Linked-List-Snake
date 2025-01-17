@@ -32,7 +32,7 @@ namespace UI
 		{
 			initializeBackgroundImage();
 			initializeButtons();
-			registerButtonCallback();
+			//registerButtonCallback();
 		}
 
 		void LevelSelectionUIController::update()

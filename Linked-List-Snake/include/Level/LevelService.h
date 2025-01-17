@@ -21,5 +21,7 @@ namespace Level
 		void initialize();
 		void update();
 		void render();
+
+		void spawnPlayer();
 	};
 }
