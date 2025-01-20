@@ -1,16 +1,36 @@
-#include "Player/SnakeController.h"
+#include "../../include/Player/SnakeController.h"
+#include "../../include/Global/ServiceLocator.h"
+#include "../../include/Event/EventService.h"
 
 namespace Player
 {
+	using namespace LinkedList;
+	using namespace Global;
+	using namespace Level;
 
-	SnakeController::SnakeController() {}
+	SnakeController::SnakeController()
+	{
+		single_linked_list = nullptr;
+		createLinkedList();
+	}
 
 	SnakeController::~SnakeController()
 	{
 		destroy();
 	}
 
-	void SnakeController::initialize() {}
+	void SnakeController::createLinkedList()
+	{
+		single_linked_list = new SingleLinkedList();
+	}
+
+	void SnakeController::initialize()
+	{
+		float width = ServiceLocator::getInstance()->getLevelService()->getCellWidth();
+		float height = ServiceLocator::getInstance()->getLevelService()->getCellHeight();
+
+		single_linked_list->initialize(width, height, default_position, default_direction);
+	}
 
 	void SnakeController::update()
 	{
@@ -29,21 +49,51 @@ namespace Player
 		}
 	}
 
-	void SnakeController::render() {}
+	void SnakeController::update()
+	{
+		switch (current_snake_state)
+		{
+		case SnakeState::ALIVE:
+			processPlayerInput();
+			updateSnakeDirection();
+			processSnakeCollision();
+			moveSnake();
+			break;
 
-	void SnakeController::processPlayerInput() {}
+		case SnakeState::DEAD:
+			handleRestart();
+			break;
+		}
+	}
 
-	void SnakeController::updateSnakeDirection() {}
+	void SnakeController::render()
+	{
+		single_linked_list->render();
+	}
 
-	void SnakeController::moveSnake() {}
+	void SnakeController::updateSnakeDirection() 
+	{
+		single_linked_list->updateNodeDirection(current_snake_direction);
+	}
+
+	void SnakeController::moveSnake() 
+	{
+		single_linked_list->updateNodePosition();
+	}
 
 	void SnakeController::processSnakeCollision() {}
 
 	void SnakeController::handleRestart() {}
 
-	void SnakeController::spawnSnake() {}
+	void SnakeController::spawnSnake()
+	{
+		for (int i = 0; i < initial_snake_length; i++) {
+			single_linked_list->insertNodeAtTail();     // Insert nodes at tail to create the initial snake
+		}
+	}
 
-	void SnakeController::reset() {}
+	void SnakeController::reset() {
+	}
 
 	void SnakeController::respawnSnake() {}
 
@@ -57,5 +107,31 @@ namespace Player
 		return current_snake_state;
 	}
 
-	void SnakeController::destroy() {}
+	void SnakeController::destroy()
+	{
+		delete (single_linked_list);
+	}
+
+	void SnakeController::processPlayerInput()
+	{
+		Event::EventService* event_service = ServiceLocator::getInstance()->getEventService();
+
+		if (event_service->pressedUpArrowKey() && current_snake_direction != Direction::DOWN)
+		{
+			current_snake_direction = Direction::UP;
+		}
+		else if (event_service->pressedDownArrowKey() && current_snake_direction != Direction::UP)
+		{
+			current_snake_direction = Direction::DOWN;
+		}
+		else if (event_service->pressedLeftArrowKey() && current_snake_direction != Direction::RIGHT)
+		{
+			current_snake_direction = Direction::LEFT;
+		}
+		else if (event_service->pressedRightArrowKey() && current_snake_direction != Direction::LEFT)
+		{
+			current_snake_direction = Direction::RIGHT;
+		}
+	}
+
 }

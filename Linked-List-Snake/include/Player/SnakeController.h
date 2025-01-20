@@ -1,6 +1,7 @@
 #pragma once
-#include <SFML/System/Vector2.hpp>
-#include "Direction.h"
+#include <Graphics/GraphicService.h>
+#include "./Player/Direction.h"
+#include "../LinkedList/SingleLinkedList.h"
 
 namespace Player
 {
@@ -41,5 +42,7 @@ namespace Player
 		void respawnSnake();
 		void setSnakeState(SnakeState state);
 		SnakeState getSnakeState();
+		LinkedList::SingleLinkedList* single_linked_list;
+		void createLinkedList();
 	};
 }
