@@ -20,24 +20,20 @@ namespace Player
 	{
 	private:
 		const int initial_snake_length = 10;
+		SnakeState current_snake_state;
+		LinkedList::SingleLinkedList* single_linked_list;
 
 		const sf::Vector2i default_position = sf::Vector2i(25, 13);
-		const Direction default_direction = Direction::RIGHT;
+		const Direction default_direction = Direction::LEFT;
 		const float movement_frame_duration = 0.1f;
-		const float restart_duration = 2.f;
-		 float restart_counter;
-
-		SnakeState current_snake_state;
 		float elapsed_duration = 0.f;
-		Direction current_snake_direction;
+		const float restart_duration = 2.f;
+		float restart_counter = 0.f;
 		InputState current_input_state;
+		Direction current_snake_direction;
 
-		void processPlayerInput();
-		void updateSnakeDirection();
-		void moveSnake();
-		void processSnakeCollision();
-		void handleRestart();
-		void reset();
+		void createLinkedList();
+		void delayedUpdate();
 		void destroy();
 
 	public:
@@ -49,11 +45,15 @@ namespace Player
 		void render();
 
 		void spawnSnake();
+		void processPlayerInput();
+		void updateSnakeDirection();
+		void moveSnake();
+		void processSnakeCollision();
+		void handleRestart();
+		void reset();
 		void respawnSnake();
 		void setSnakeState(SnakeState state);
+
 		SnakeState getSnakeState();
-		LinkedList::SingleLinkedList* single_linked_list;
-		void createLinkedList();
-		void delayedUpdate();
 	};
 }
