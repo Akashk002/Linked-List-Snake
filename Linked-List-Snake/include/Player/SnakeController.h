@@ -11,6 +11,11 @@ namespace Player
 		DEAD,
 	};
 
+	enum class InputState
+	{
+		WAITING,
+		PROCESSING
+	};
 	class SnakeController
 	{
 	private:
@@ -25,6 +30,7 @@ namespace Player
 		SnakeState current_snake_state;
 		float elapsed_duration = 0.f;
 		Direction current_snake_direction;
+		InputState current_input_state;
 
 		void processPlayerInput();
 		void updateSnakeDirection();

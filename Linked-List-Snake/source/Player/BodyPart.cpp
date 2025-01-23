@@ -76,26 +76,9 @@ namespace Player
 		this->direction = direction;
 	}
 	
-	Direction BodyPart::GetDirection()
+	Direction BodyPart::getDirection()
 	{
 		return direction;
-	}
-
-	sf::Vector2i BodyPart::getNextPositionLeft()
-	{
-		return sf::Vector2i(grid_position.x - 1, grid_position.y);
-	}
-	sf::Vector2i BodyPart::getNextPositionRight()
-	{
-		return sf::Vector2i(grid_position.x + 1, grid_position.y);
-	}
-	sf::Vector2i BodyPart::getNextPositionUp()
-	{
-		return sf::Vector2i(grid_position.x, grid_position.y - 1);
-	}
-	sf::Vector2i BodyPart::getNextPositionDown()
-	{
-		return sf::Vector2i(grid_position.x, grid_position.y + 1);
 	}
 
 	sf::Vector2i BodyPart::getNextPosition()
@@ -139,7 +122,7 @@ namespace Player
 
 	sf::Vector2i BodyPart::getNextPositionUp()
 	{
-		return sf::Vector2i(grid_position.x, (grid_position.y - 1 + (LevelModel::number_of_rows)) % (LevelModel::number_of_rows));
+		return sf::Vector2i(grid_position.x, grid_position.y - 1);
 	}
 
 	sf::Vector2i BodyPart::getNextPositionRight()
@@ -151,7 +134,6 @@ namespace Player
 	{
 		return sf::Vector2i((grid_position.x - 1 + LevelModel::number_of_columns) % (LevelModel::number_of_columns), grid_position.y);
 	}
-
 
 	void BodyPart::destroy()
 	{

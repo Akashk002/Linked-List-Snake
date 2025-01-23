@@ -1,6 +1,5 @@
 #pragma once
-#include <UI/LevelSelection/LevelSelectionUIController.h>
-#include <SFML/System/Vector2.hpp>
+#include "UI/UIElement/ImageView.h"
 #include "Direction.h"
 #include <SFML/Graphics.hpp>
 
@@ -31,7 +30,7 @@ namespace Player
 		 float getRotationAngle() ;
 		sf::Vector2f getBodyPartScreenPosition();
 		void setDirection(Direction direction);
-		Direction GetDirection();
+		Direction getDirection();
 		sf::Vector2i getPosition();
 		void updatePosition();
 		sf::Vector2i getNextPositionUp();
@@ -39,7 +38,7 @@ namespace Player
 		sf::Vector2i getNextPositionLeft();
 		sf::Vector2i getNextPositionRight();
 		sf::Vector2i getNextPosition();
-		void setPosition(sf::Vector2i position)
+		void setPosition(sf::Vector2i position);
 
 	};
 }

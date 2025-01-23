@@ -11,6 +11,7 @@ namespace Level
 		LevelNumber current_level;
 
 		void destroy();
+
 		void createLevelController();
 
 	public:
@@ -21,6 +22,8 @@ namespace Level
 		void initialize();
 		void update();
 		void render();
+		float getCellHeight();
+		float getCellWidth();
 
 		void spawnPlayer();
 	};

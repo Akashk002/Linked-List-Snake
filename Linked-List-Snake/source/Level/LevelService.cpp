@@ -16,6 +16,7 @@ namespace Level
 	void LevelService::createLevel(LevelNumber level_to_load)
 	{
 		current_level = level_to_load;
+		spawnPlayer();
 	}
 
 	void LevelService::createLevelController()
@@ -41,6 +42,16 @@ namespace Level
 	void LevelService::destroy()
 	{
 		delete(level_controller);
+	}
+
+	float LevelService::getCellHeight()
+	{
+		return level_controller->getCellHeight();
+	}
+
+	float LevelService::getCellWidth()
+	{
+		return level_controller->getCellWidth();
 	}
 
 	void LevelService::spawnPlayer()

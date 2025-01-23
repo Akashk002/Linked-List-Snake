@@ -64,7 +64,8 @@ namespace LinkedList
 		return default_position;
 	}
 
-	void SingleLinkedList::insertNodeAtTail() {
+	void SingleLinkedList::insertNodeAtTail() 
+	{
 		Node* new_node = createNode();
 		Node* cur_node = head_node;
 
