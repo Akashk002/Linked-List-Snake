@@ -41,11 +41,25 @@ namespace Player
 			updateSnakeDirection();
 			processSnakeCollision();
 			moveSnake();
+			delayedUpdate();
 			break;
 
 		case SnakeState::DEAD:
 			handleRestart();
 			break;
+		}
+	}
+
+	void SnakeController::delayedUpdate()
+	{
+		elapsed_duration += ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
+
+		if (elapsed_duration >= movement_frame_duration)
+		{
+			elapsed_duration = 0.f;
+			updateSnakeDirection();
+			processSnakeCollision();
+			moveSnake();
 		}
 	}
 
@@ -81,9 +95,23 @@ namespace Player
 		single_linked_list->updateNodePosition();
 	}
 
-	void SnakeController::processSnakeCollision() {}
+	void SnakeController::processSnakeCollision() 
+	{
+		if (single_linked_list->processNodeCollision())
+		{
+			current_snake_state = SnakeState::DEAD;
+		}
+	}
 
-	void SnakeController::handleRestart() {}
+	void SnakeController::handleRestart() 
+	{
+		restart_counter += ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
+
+		if (restart_counter >= restart_duration)
+		{
+			respawnSnake();
+		}
+	}
 
 	void SnakeController::spawnSnake()
 	{
@@ -92,7 +120,12 @@ namespace Player
 		}
 	}
 
-	void SnakeController::reset() {
+	void SnakeController::reset() 
+	{
+		current_snake_state = SnakeState::ALIVE;
+		current_snake_direction = default_direction;
+		elapsed_duration = 0.f;
+		restart_counter = 0.f;
 	}
 
 	void SnakeController::respawnSnake() {}
@@ -132,6 +165,12 @@ namespace Player
 		{
 			current_snake_direction = Direction::RIGHT;
 		}
+	}
+	void SnakeController::respawnSnake()
+	{
+		single_linked_list->removeAllNodes();
+		reset();
+		spawnSnake();
 	}
 
 }

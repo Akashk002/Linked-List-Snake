@@ -20,9 +20,11 @@ namespace LinkedList
 
 		Node* createNode();
 		sf::Vector2i getNewNodePosition(Node* reference_node);
+		
+	public:
 		void insertNodeAtTail();
 
-	public:
+
 		void createHeadNode();
 
 	
@@ -32,6 +34,9 @@ namespace LinkedList
 		void initialize(float width, float height, sf::Vector2i position, Player::Direction direction);
 		void render();
 		void updateNodePosition();
-		void updateNodeDirection(Direction direction_to_set);
+		void updateNodeDirection(Player::Direction direction_to_set);
+		bool processNodeCollision();
+		void removeNodeAtHead();
+		void removeAllNodes()
 	};
 }
