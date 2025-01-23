@@ -1,6 +1,7 @@
 #include "../../include/Level/LevelController.h"
 #include "../../include/Level/LevelModel.h"
 #include "../../include/Level/LevelView.h"
+#include <Element/ElementData.h>
 
 namespace Level
 {
@@ -35,7 +36,6 @@ namespace Level
 	{
 		delete(level_model);
 		delete(level_view);
-
 	}
 
 	float LevelController::getCellWidth()
@@ -46,5 +46,10 @@ namespace Level
 	float LevelController::getCellHeight()
 	{
 		return level_model->getCellHeight();
+	}
+
+	const std::vector<Element::ElementData>& LevelController::getElementDataList(int level_to_load)
+	{
+		return level_model->getElementDataList(level_to_load);
 	}
 }
