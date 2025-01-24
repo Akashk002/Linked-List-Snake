@@ -10,6 +10,8 @@ namespace Player
 		void createController();
 		void destroy();
 
+	
+
 	public:
 		PlayerService();
 		~PlayerService();
@@ -19,5 +21,6 @@ namespace Player
 		void render();
 
 		void spawnPlayer();
+		std::vector<sf::Vector2i> getCurrentSnakePositionList();
 	};
 }

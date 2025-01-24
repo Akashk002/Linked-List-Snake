@@ -37,6 +37,7 @@ namespace LinkedList
 		void updateNodeDirection(Player::Direction direction_to_set);
 		bool processNodeCollision();
 		void removeNodeAtHead();
+		std::vector<sf::Vector2i> getNodesPositionList();
 		void removeAllNodes();
 	};
 }

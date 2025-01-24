@@ -22,6 +22,7 @@ namespace Level
 		current_level = level_to_load;
 		spawnLevelElements(level_to_load);
 		spawnPlayer();
+		spawnFood();
 	}
 
 	void LevelService::createLevelController()
@@ -71,5 +72,10 @@ namespace Level
 
 		std::vector<ElementData> element_data_list = level_controller->getElementDataList((int)level_to_load);
 		ServiceLocator::getInstance()->getElementService()->spawnElements(element_data_list, cell_width, cell_height);
+	}
+
+	void LevelService::spawnFood()
+	{
+		ServiceLocator::getInstance()->getFoodService()->startFoodSpawning();
 	}
 }
