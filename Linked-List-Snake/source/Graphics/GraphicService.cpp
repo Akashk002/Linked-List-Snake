@@ -21,7 +21,7 @@ namespace Graphics
 	sf::RenderWindow* GraphicService::createGameWindow()
 	{
 		configureVideoMode();
-		return new sf::RenderWindow(video_mode, game_window_title, sf::Style::Fullscreen);
+		return new sf::RenderWindow(video_mode, game_window_title, sf::Style::Default);
 	}
 
 	void GraphicService::configureVideoMode()
@@ -39,9 +39,9 @@ namespace Graphics
 		game_window->setFramerateLimit(frame_rate_to_set);
 	}
 
-	void GraphicService::update() { }
+	void GraphicService::update() {}
 
-	void GraphicService::render() { }
+	void GraphicService::render() {}
 
 	bool GraphicService::isGameWindowOpen()
 	{

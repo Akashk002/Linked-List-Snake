@@ -89,7 +89,6 @@ namespace UI
 			Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::BUTTON_CLICK);
 			Main::GameService::setGameState(Main::GameState::GAMEPLAY);
 			Global::ServiceLocator::getInstance()->getLevelService()->createLevel(Level::LevelNumber::TWO);
-;
 		}
 
 		void LevelSelectionUIController::menuButtonCallback()

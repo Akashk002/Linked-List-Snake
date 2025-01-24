@@ -38,6 +38,17 @@ namespace Level
 		border_rectangle = new UI::UIElement::RectangleShapeView();
 	}
 
+	void LevelView::initializeBorder()
+	{
+		sf::RenderWindow* game_window = Global::ServiceLocator::getInstance()->getGraphicService()->getGameWindow();
+
+		sf::Vector2f border_size = sf::Vector2f(grid_width, grid_height);
+		sf::Vector2f border_position = sf::Vector2f(border_offset_left, border_offset_top);
+
+		border_rectangle->initialize(border_size, border_position, border_thickness, sf::Color::Transparent, border_color);
+		border_rectangle->show();
+	}
+
 	void LevelView::initializeBackground()
 	{
 		sf::RenderWindow* game_window = Global::ServiceLocator::getInstance()->getGraphicService()->getGameWindow();
@@ -56,16 +67,6 @@ namespace Level
 		grid_height = game_window->getSize().y - 2 * border_offset_top;
 	}
 
-	void LevelView::initializeBorder()
-	{
-		sf::RenderWindow* game_window = Global::ServiceLocator::getInstance()->getGraphicService()->getGameWindow();
-
-		sf::Vector2f border_size = sf::Vector2f(grid_width, grid_height);
-		sf::Vector2f border_position = sf::Vector2f(border_offset_left, border_offset_top);
-
-		border_rectangle->initialize(border_size, border_position, border_thickness, sf::Color::Transparent, border_color);
-		border_rectangle->show();
-	}
 
 	float LevelView::getGridWidth()
 	{
@@ -79,7 +80,6 @@ namespace Level
 
 	void LevelView::destroy()
 	{
-		delete (background_rectangle);
-		delete (border_rectangle);
+		delete(background_rectangle);
 	}
 }
