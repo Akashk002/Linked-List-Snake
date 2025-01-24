@@ -11,6 +11,7 @@ namespace Player
 	{
 		grid_position = sf::Vector2i(0, 0);
 		bodypart_image = nullptr;
+
 		createBodyPartImage();
 	}
 
@@ -19,39 +20,36 @@ namespace Player
 		destroy();
 	}
 
-	void BodyPart::createBodyPartImage()
-	{
-		bodypart_image = new UI::UIElement::ImageView();
-	}
-
 	void BodyPart::initialize(float width, float height, sf::Vector2i pos, Direction dir)
 	{
-		bodypart_width = width;
 		bodypart_height = height;
-		direction = dir;
+		bodypart_width = width;
 		grid_position = pos;
+		direction = dir;
 
 		initializeBodyPartImage();
-	}
-
-	void BodyPart::update()
-	{
-	
 	}
 
 	void BodyPart::render()
 	{
 		bodypart_image->render();
 	}
+
+	void BodyPart::createBodyPartImage()
+	{
+		bodypart_image = new UI::UIElement::ImageView();
+	}
+
 	void BodyPart::initializeBodyPartImage()
 	{
-
+		bodypart_image->initialize(Global::Config::snake_body_texture_path, bodypart_width, bodypart_height, getBodyPartScreenPosition());
+		bodypart_image->setOriginAtCentre();
 	}
 
 	sf::Vector2f BodyPart::getBodyPartScreenPosition()
 	{
-		float x_screen_position = LevelView::border_offset_left + (grid_position.x * bodypart_width) + (bodypart_width / 2);
-		float y_screen_position = LevelView::border_offset_top + (grid_position.y * bodypart_height) + (bodypart_height / 2);
+		float x_screen_position = Level::LevelView::border_offset_left + (grid_position.x * bodypart_width) + (bodypart_width / 2);
+		float y_screen_position = Level::LevelView::border_offset_top + (grid_position.y * bodypart_height) + (bodypart_height / 2);
 
 		return sf::Vector2f(x_screen_position, y_screen_position);
 	}
@@ -71,14 +69,18 @@ namespace Player
 		}
 	}
 
-	void BodyPart::setDirection(Direction direction)
+	void BodyPart::setBodyPartDirection(Direction direction)
 	{
 		this->direction = direction;
 	}
-	
-	Direction BodyPart::getDirection()
+
+	void BodyPart::updatePosition()
 	{
-		return direction;
+		grid_position = getNextPosition();
+
+		bodypart_image->setPosition(getBodyPartScreenPosition());
+		bodypart_image->setRotation(getRotationAngle());
+		bodypart_image->update();
 	}
 
 	sf::Vector2i BodyPart::getNextPosition()
@@ -102,18 +104,6 @@ namespace Player
 	{
 		grid_position = position;
 	}
-	
-	sf::Vector2i BodyPart::getPosition()
-	{
-		return grid_position;
-	}
-
-	void BodyPart::updatePosition()
-	{
-		bodypart_image->setPosition(getBodyPartScreenPosition());
-		bodypart_image->setRotation(getRotationAngle());
-		bodypart_image->update();
-	}
 
 	sf::Vector2i BodyPart::getNextPositionDown()
 	{
@@ -122,12 +112,7 @@ namespace Player
 
 	sf::Vector2i BodyPart::getNextPositionUp()
 	{
-		return sf::Vector2i(grid_position.x, grid_position.y - 1);
-	}
-
-	sf::Vector2i BodyPart::getNextPositionRight()
-	{
-		return sf::Vector2i((grid_position.x + 1) % (LevelModel::number_of_columns), grid_position.y);
+		return  sf::Vector2i(grid_position.x, (grid_position.y - 1 + (LevelModel::number_of_rows)) % (LevelModel::number_of_rows));
 	}
 
 	sf::Vector2i BodyPart::getNextPositionLeft()
@@ -135,8 +120,23 @@ namespace Player
 		return sf::Vector2i((grid_position.x - 1 + LevelModel::number_of_columns) % (LevelModel::number_of_columns), grid_position.y);
 	}
 
+	sf::Vector2i BodyPart::getNextPositionRight()
+	{
+		return  sf::Vector2i((grid_position.x + 1) % (LevelModel::number_of_columns), grid_position.y);
+	}
+
+	sf::Vector2i BodyPart::getPosition()
+	{
+		return grid_position;
+	}
+
+	Direction BodyPart::getDirection()
+	{
+		return direction;
+	}
+
 	void BodyPart::destroy()
 	{
-		delete (bodypart_image);
+		delete(bodypart_image);
 	}
 }

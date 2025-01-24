@@ -5,17 +5,18 @@
 
 namespace Player
 {
-	enum class SnakeState
-	{
-		ALIVE,
-		DEAD,
-	};
-
 	enum class InputState
 	{
 		WAITING,
 		PROCESSING
 	};
+
+	enum class SnakeState
+	{
+		ALIVE,
+		DEAD
+	};
+
 	class SnakeController
 	{
 	private:
