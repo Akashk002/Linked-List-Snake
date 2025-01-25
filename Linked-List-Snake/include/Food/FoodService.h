@@ -47,6 +47,8 @@ namespace Food
 		void handleFoodSpawning();
 		void reset();
 
+		
+
 	public:
 		FoodService();
 		~FoodService();
@@ -57,5 +59,6 @@ namespace Food
 
 		void startFoodSpawning();
 		void stopFoodSpawning();
+		bool processFoodCollision(LinkedList::Node* head_node, FoodType& out_food_type);
 	};
 }
