@@ -24,12 +24,21 @@ namespace LinkedList
 
 		sf::Vector2i default_position;
 		Player::Direction default_direction;
+		int linked_list_size = 0;
 
 		Node* createNode();
 		sf::Vector2i getNewNodePosition(Node* reference_node, Operation operation);
 		
 	public:
 		void insertNodeAtTail();
+
+		void insertNodeAtIndex(int index);
+
+		void shiftNodesAfterInsertion(Node* new_node, Node* cur_node, Node* prev_node);
+
+		int findMiddleNode();
+
+		void insertNodeAtMiddle();
 
 		void initializeNode(Node* new_node, Node* reference_node, Operation operation);
 
@@ -47,6 +56,7 @@ namespace LinkedList
 		bool processNodeCollision();
 		void removeNodeAtHead();
 		std::vector<sf::Vector2i> getNodesPositionList();
+		void insertNodeAtHead();
 		void removeAllNodes();
 
 		Node* getHeadNode();
