@@ -1,3 +1,4 @@
+#include "SnakeController.h"
 namespace Player
 {
 	class SnakeController;
@@ -22,5 +23,9 @@ namespace Player
 
 		void spawnPlayer();
 		std::vector<sf::Vector2i> getCurrentSnakePositionList();
+		int getPlayerScore();
+		LinkedListOperations getLinkedListOperation();
+		TimeComplexity getTimeComplexity();
+		LinkedListOperations getLastOperation();
 	};
 }

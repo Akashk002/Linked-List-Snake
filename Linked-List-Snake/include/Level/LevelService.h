@@ -27,6 +27,8 @@ namespace Level
 		float getCellWidth();
 		void spawnFood();
 
+		LevelNumber getCurrentLevel();
+
 		void spawnPlayer();
 	};
 }

@@ -17,6 +17,27 @@ namespace Player
 		DEAD
 	};
 
+	//SnakeController.h
+	enum class TimeComplexity
+	{
+		NONE,
+		ONE,
+		N,
+	};
+
+	enum class LinkedListOperations
+	{
+		NONE,
+		INSERT_AT_HEAD,
+		INSERT_AT_TAIL,
+		INSERT_AT_MID,
+		REMOVE_AT_HEAD,
+		REMOVE_AT_TAIL,
+		REMOVE_AT_MID,
+		DELETE_HALF_LIST,
+		REVERSE_LIST,
+	};
+
 	class SnakeController
 	{
 	private:
@@ -32,6 +53,8 @@ namespace Player
 		float restart_counter = 0.f;
 		InputState current_input_state;
 		Direction current_snake_direction;
+		TimeComplexity time_complexity;
+		LinkedListOperations last_linked_list_operation;
 
 		void createLinkedList();
 		void delayedUpdate();
@@ -61,5 +84,10 @@ namespace Player
 		void setSnakeState(SnakeState state);
 
 		SnakeState getSnakeState();
+		int player_score;
+		int getPlayerScore();
+		TimeComplexity getTimeComplexity();
+		LinkedListOperations getLinkedListOperation();
+		LinkedListOperations getLastOperation();
 	};
 }

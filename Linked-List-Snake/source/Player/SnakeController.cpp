@@ -159,6 +159,7 @@ namespace Player
 			food_service->destroyFood();
 			OnFoodCollected(food_type);
 		}
+		player_score++;
 	}
 
 	void SnakeController::OnFoodCollected(FoodType food_type)
@@ -216,6 +217,7 @@ namespace Player
 		elapsed_duration = 0.f;
 		restart_counter = 0.f;
 		current_input_state = InputState::WAITING;
+		player_score = 0;
 	}
 
 	void SnakeController::updateSnakeDirection()
@@ -291,4 +293,13 @@ namespace Player
 			break;
 		}
 	}
+	int SnakeController::getPlayerScore()
+	{
+		return player_score;
+	 }
+	TimeComplexity SnakeController::getTimeComplexity()
+	{
+		return time_complexity;
+	}
+
 }
