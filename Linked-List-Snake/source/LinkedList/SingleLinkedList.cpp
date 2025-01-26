@@ -309,4 +309,99 @@ namespace LinkedList
 		int midIndex = findMiddleNode();
 		removeNodeAtIndex(midIndex);
 	}
+
+	void SingleLinkedList::removeNodeAtTail()
+	{
+		if (head_node == nullptr) return;
+		linked_list_size--; //Decrement linked list size when you are deleting a node
+
+		Node* cur_node = head_node;
+
+		if (cur_node->next == nullptr) //If there is only 1 node in the linked list
+		{
+			removeNodeAtHead();
+			return;
+		}
+
+		while (cur_node->next->next != nullptr) //If there is more than 1 node in the linked list
+		{
+			cur_node = cur_node->next;
+		}
+
+		delete (cur_node->next);
+		cur_node->next = nullptr; //Set the new tail node's next pointer to nullptr
+	}
+
+	Node* SingleLinkedList::findNodeAtIndex(int index) 
+	{
+		int current_index = 0;
+		Node* cur_node = head_node;
+		Node* prev_node = nullptr;
+
+		while (cur_node != nullptr && current_index <= index)
+		{
+			prev_node = cur_node;
+			cur_node = cur_node->next;
+			current_index++;
+		}
+
+		return prev_node;
+	}
+
+	void SingleLinkedList::removeHalfNodes()
+	{
+		if (linked_list_size <= 1) return;
+		int half_length = linked_list_size / 2;
+		int new_tail_index = half_length - 1;
+
+		Node* prev_node = findNodeAtIndex(new_tail_index);
+		Node* cur_node = prev_node->next;
+
+		while (cur_node != nullptr)
+		{
+			Node* node_to_delete = cur_node;
+			cur_node = cur_node->next;
+
+			delete (node_to_delete);
+			linked_list_size--;
+		}
+		prev_node->next = nullptr;
+	}
+
+	void SingleLinkedList::reverseNodeDirections()
+	{
+		Node* curr_node = head_node;
+
+		while (curr_node != nullptr)
+		{
+			curr_node->body_part.setDirection(getReverseDirection(curr_node->body_part.getPreviousDirection()));
+			curr_node = curr_node->next;
+		}
+	}
+
+	Direction SingleLinkedList::reverse()
+	{
+		Node* cur_node = head_node;
+		Node* prev_node = nullptr;
+		Node* next_node = nullptr;
+
+		while (cur_node != nullptr)
+		{
+			next_node = cur_node->next;
+			cur_node->next = prev_node;
+
+			prev_node = cur_node;
+			cur_node = next_node;
+		}
+
+		head_node = prev_node;
+
+		reverseNodeDirections();
+		return head_node->body_part.getDirection();
+	}
+
+	Direction SingleLinkedList::getReverseDirection(Direction reference_direction)
+	{
+		return reference_direction;
+	}
 }

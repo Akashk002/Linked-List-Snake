@@ -60,5 +60,16 @@ namespace LinkedList
 		void removeAllNodes();
 
 		Node* getHeadNode();
+
+		void shiftNodesAfterRemoval(Node* cur_node);
+		void removeNodeAtMiddle();
+		void removeNodeAtTail();
+		void removeNodeAtIndex(int index);
+		void shiftNodesAfterRemoval(Node* node);
+		Node* findNodeAtIndex(int index);
+		void removeHalfNodes();
+		Direction reverse();
+		void reverseNodeDirections();
+		Direction getReverseDirection(Direction reference_direction);
 	};
 }

@@ -41,6 +41,8 @@ namespace Player
 		sf::Vector2i getNextPositionRight();
 		sf::Vector2i getNextPosition();
 		void setPosition(sf::Vector2i position);
+		Direction previous_direction;
+		Direction getPreviousDirection();
 
 	};
 }
