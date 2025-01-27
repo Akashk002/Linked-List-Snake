@@ -2,9 +2,12 @@
 #include <Graphics/GraphicService.h>
 #include "./Player/Direction.h"
 #include "../LinkedList/SingleLinkedList.h"
+#include "../../include/Food/FoodType.h"
 
 namespace Player
 {
+	using namespace Food;
+
 	enum class InputState
 	{
 		WAITING,
@@ -17,7 +20,6 @@ namespace Player
 		DEAD
 	};
 
-	//SnakeController.h
 	enum class TimeComplexity
 	{
 		NONE,
@@ -56,6 +58,8 @@ namespace Player
 		TimeComplexity time_complexity;
 		LinkedListOperations last_linked_list_operation;
 
+		int player_score;
+
 		void createLinkedList();
 		void delayedUpdate();
 		void destroy();
@@ -73,21 +77,20 @@ namespace Player
 		void updateSnakeDirection();
 		void moveSnake();
 		void processSnakeCollision();
-		void processBodyCollision();
-		void processElementsCollision();
+		void processBodyCollisions();
+		void processElementCollisions();
 		void processFoodCollision();
 		void OnFoodCollected(FoodType food_type);
 		void handleRestart();
 		void reset();
 		void respawnSnake();
-		std::vector<sf::Vector2i> getCurrentSnakePositionList();
 		void setSnakeState(SnakeState state);
 
-		SnakeState getSnakeState();
-		int player_score;
-		int getPlayerScore();
-		TimeComplexity getTimeComplexity();
 		LinkedListOperations getLinkedListOperation();
-		LinkedListOperations getLastOperation();
+		TimeComplexity getTimeComplexity();
+		int getPlayerScore();
+		std::vector<sf::Vector2i> getCurrentSnakePositionList();
+
+		SnakeState getSnakeState();
 	};
 }

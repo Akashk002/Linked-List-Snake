@@ -1,7 +1,12 @@
-#include "SnakeController.h"
+#pragma once
+#include <vector>
+#include <SFML/Graphics.hpp>
+
 namespace Player
 {
 	class SnakeController;
+	enum class LinkedListOperations;
+	enum class TimeComplexity;
 
 	class PlayerService
 	{
@@ -10,9 +15,6 @@ namespace Player
 
 		void createController();
 		void destroy();
-
-	
-
 	public:
 		PlayerService();
 		~PlayerService();
@@ -21,11 +23,11 @@ namespace Player
 		void update();
 		void render();
 
-		void spawnPlayer();
-		std::vector<sf::Vector2i> getCurrentSnakePositionList();
-		int getPlayerScore();
 		LinkedListOperations getLinkedListOperation();
 		TimeComplexity getTimeComplexity();
-		LinkedListOperations getLastOperation();
+		int getPlayerScore();
+		std::vector<sf::Vector2i> getCurrentSnakePositionList();
+
+		void spawnPlayer();
 	};
 }

@@ -43,13 +43,23 @@ namespace Player
 		delete(snake_controller);
 	}
 
+	int PlayerService::getPlayerScore()
+	{
+		return snake_controller->getPlayerScore();
+	}
+
+	LinkedListOperations PlayerService::getLinkedListOperation()
+	{
+		return snake_controller->getLinkedListOperation();
+	}
+
+	TimeComplexity PlayerService::getTimeComplexity()
+	{
+		return snake_controller->getTimeComplexity();
+	}
+
 	std::vector<sf::Vector2i> PlayerService::getCurrentSnakePositionList()
 	{
 		return snake_controller->getCurrentSnakePositionList();
-	}
-
-	int PlayerService::getPlayerScore()
-	{
-		snake_controller->getPlayerScore();
 	}
 }

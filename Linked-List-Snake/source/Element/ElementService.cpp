@@ -49,7 +49,7 @@ namespace Element
 		}
 	}
 
-	std::vector<sf::Vector2i> ElementService::getElementsPositionList()
+	std::vector<sf::Vector2i> ElementService::getElementPositionList()
 	{
 		std::vector<sf::Vector2i> elements_position_list;
 
@@ -61,7 +61,7 @@ namespace Element
 		return elements_position_list;
 	}
 
-	bool ElementService::processElementsCollision(LinkedList::Node* head_node)
+	bool ElementService::processElementCollisions(LinkedList::Node* head_node)
 	{
 		for (int i = 0; i < obstacle_list.size(); i++)
 		{
