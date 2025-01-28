@@ -1,7 +1,7 @@
 #pragma once
-#include "../../include/Player/BodyPart.h"
+#include "Player/BodyPart.h"
 
-namespace LinkedList
+namespace LinkedListLib
 {
 	using namespace Player;
 
