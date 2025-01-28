@@ -1,9 +1,10 @@
-#include "../../include/LinkedList/SingleLinkedList.h"
-#include "../../include/LinkedList/Node.h"
+#include "../../include/LinkedListLib/SingleLinked/SingleLinkedList.h"
+#include "../../include/LinkedListLib/Node.h"
+#include "../../include/LinkedListLib/SingleLinked/SingleNode.h"
 
-
-namespace LinkedList
+namespace LinkedListLib
 {
+	using namespace SingleLinked;
 	using namespace Player;
 
 	SingleLinkedList::SingleLinkedList()
@@ -428,4 +429,3 @@ namespace LinkedList
 		reverseNodeDirections();
 		return head_node->body_part.getDirection();
 	}
-}
