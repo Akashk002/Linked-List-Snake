@@ -28,6 +28,7 @@ namespace Player
 		void createBodyPartImage();
 		void initializeBodyPartImage();
 		 float getRotationAngle() ;
+		 sf::Vector2i getPrevPosition();
 		 void setBodyPartDirection(Direction direction);
 		sf::Vector2f getBodyPartScreenPosition();
 		void setDirection(Direction direction);
@@ -40,6 +41,8 @@ namespace Player
 		sf::Vector2i getNextPositionRight();
 		sf::Vector2i getNextPosition();
 		void setPosition(sf::Vector2i position);
+		Direction previous_direction;
+		Direction getPreviousDirection();
 
 	};
 }

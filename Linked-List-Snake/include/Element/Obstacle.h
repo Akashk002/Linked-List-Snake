@@ -16,10 +16,10 @@ namespace Element
 
         void initializeObstacleImage();
         sf::Vector2f getObstacleImagePosition();
-
+    public:
         sf::Vector2i getObstaclePosition();
 
-    public:
+    
         Obstacle();
         ~Obstacle();
 
