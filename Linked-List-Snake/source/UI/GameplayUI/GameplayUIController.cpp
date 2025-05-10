@@ -1,11 +1,8 @@
-#include "UI/GameplayUI/GameplayUIController.h"
-#include "Main/GameService.h"
-#include "Graphics/GraphicService.h"
-#include "Sound/SoundService.h"
-#include "Event/EventService.h"
-#include "Global/Config.h"
-#include "Level/LevelModel.h"
-#include "Player/PlayerService.h"
+#pragma once
+#include "../../include/UI/GameplayUI/GameplayUIController.h"
+#include "../../include/Global/ServiceLocator.h"
+#include "../../include/Main/GameService.h"
+#include "../../include/Player/SnakeController.h"
 
 namespace UI
 {
@@ -47,8 +44,8 @@ namespace UI
         {
             initializeLevelNumberText();
             initializeScoreText();
-            initializeTimeComplexityText();
             initializeOperationText();
+            initializeTimeComplexityText();
         }
 
         void GameplayUIController::initializeLevelNumberText()
@@ -59,16 +56,6 @@ namespace UI
         void GameplayUIController::initializeScoreText()
         {
             score_text->initialize("Score : 0", sf::Vector2f(score_text_x_position, text_y_position), FontType::BUBBLE_BOBBLE, font_size, sf::Color::Black);
-        }
-
-        void GameplayUIController::initializeTimeComplexityText()
-        {
-            time_complexity_text->initialize("Time Complexity : O(1)", sf::Vector2f(time_complexity_text_x_position, time_complexity_text_y_position), FontType::BUBBLE_BOBBLE, operations_font_size, sf::Color::Black);
-        }
-
-        void GameplayUIController::initializeOperationText()
-        {
-            operation_text->initialize("Last Operation : Insert at Middle", sf::Vector2f(operations_text_x_position, operations_text_y_position), FontType::BUBBLE_BOBBLE, operations_font_size, sf::Color::Black);
         }
 
         void GameplayUIController::updateLevelNumberText()
@@ -87,6 +74,48 @@ namespace UI
 
             score_text->setText("Score : " + score_value);
             score_text->update();
+        }
+
+        void GameplayUIController::update()
+        {
+            updateLevelNumberText();
+            updateScoreText();
+            updateOperationText();
+            updateTimeComplexityText();
+        }
+
+        void GameplayUIController::render()
+        {
+            level_number_text->render();
+            score_text->render();
+            time_complexity_text->render();
+            operation_text->render();
+        }
+
+        void GameplayUIController::show()
+        {
+            level_number_text->show();
+            score_text->show();
+            time_complexity_text->show();
+            operation_text->show();
+        }
+
+        void GameplayUIController::destroy()
+        {
+            delete (level_number_text);
+            delete (score_text);
+            delete (time_complexity_text);
+            delete (operation_text);
+        }
+
+        void GameplayUIController::initializeTimeComplexityText()
+        {
+            time_complexity_text->initialize("Time Complexity : O(1)", sf::Vector2f(time_complexity_text_x_position, time_complexity_text_y_position), FontType::BUBBLE_BOBBLE, operations_font_size, sf::Color::Black);
+        }
+
+        void GameplayUIController::initializeOperationText()
+        {
+            operation_text->initialize("Last Operation : Insert at Middle", sf::Vector2f(operations_text_x_position, operations_text_y_position), FontType::BUBBLE_BOBBLE, operations_font_size, sf::Color::Black);
         }
 
         void GameplayUIController::updateTimeComplexityText()
@@ -111,7 +140,7 @@ namespace UI
 
         void GameplayUIController::updateOperationText()
         {
-            LinkedListOperations operation = ServiceLocator::getInstance()->getPlayerService()->getLastOperation();
+            LinkedListOperations operation = ServiceLocator::getInstance()->getPlayerService()->getLinkedListOperation();
             sf::String operation_value;
 
             switch (operation)
@@ -147,38 +176,6 @@ namespace UI
 
             operation_text->setText("Last Operation : " + operation_value);
             operation_text->update();
-        }
-
-        void GameplayUIController::update()
-        {
-            updateLevelNumberText();
-            updateScoreText();
-            updateTimeComplexityText();
-            updateOperationText();
-        }
-
-        void GameplayUIController::render()
-        {
-            level_number_text->render();
-            score_text->render();
-            time_complexity_text->render();
-            operation_text->render();
-        }
-
-        void GameplayUIController::show()
-        {
-            level_number_text->show();
-            score_text->show();
-            time_complexity_text->show();
-            operation_text->show();
-        }
-
-        void GameplayUIController::destroy()
-        {
-            delete (level_number_text);
-            delete (score_text);
-            delete (time_complexity_text);
-            delete (operation_text);
         }
     }
 }

@@ -61,7 +61,7 @@ namespace Element
 		return elements_position_list;
 	}
 
-	bool ElementService::processElementCollisions(LinkedList::Node* head_node)
+	bool ElementService::processElementCollisions(LinkedListLib::Node* head_node)
 	{
 		for (int i = 0; i < obstacle_list.size(); i++)
 		{

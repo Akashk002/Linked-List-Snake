@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <random>
-#include "../../include/LinkedList/Node.h"
+#include "../../include/LinkedListLib/Node.h"
 
 namespace Food
 {
@@ -43,7 +43,7 @@ namespace Food
 		void reset();
 
 		void destroyFood();
-		bool processFoodCollisions(LinkedList::Node* head_node, FoodType& out_food_type);
+		bool processFoodCollisions(LinkedListLib::Node* head_node, FoodType& out_food_type);
 		void startFoodSpawning();
 		void stopFoodSpawning();
 		void spawnFood();

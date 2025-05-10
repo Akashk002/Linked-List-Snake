@@ -12,6 +12,8 @@ namespace UI
 	using namespace UIElement;
 	using namespace Interface;
 	using namespace LevelSelection;
+	using namespace UI::GameplayUI;
+	using namespace LinkedListUI;
 
 	UIService::UIService()
 	{
@@ -20,6 +22,8 @@ namespace UI
 		instructions_screen_ui_controller = nullptr;
 		credits_screen_ui_controller = nullptr;
 		level_selection_ui_controller = nullptr;
+		gameplay_ui_controller = nullptr;
+		linked_list_selection_ui_controller = nullptr;
 
 		createControllers();
 	}
@@ -28,9 +32,11 @@ namespace UI
 	{
 		splash_screen_controller = new SplashScreenUIController();
 		main_menu_controller = new MainMenuUIController();
+		level_selection_ui_controller = new LevelSelectionUIController();
 		instructions_screen_ui_controller = new InstructionsScreenUIController();
 		credits_screen_ui_controller = new CreditsScreenUIController();
-		level_selection_ui_controller = new LevelSelectionUIController();
+		linked_list_selection_ui_controller = new LinkedListSelectionUIController();
+		gameplay_ui_controller = new GameplayUIController();
 
 	}
 
@@ -70,6 +76,8 @@ namespace UI
 		instructions_screen_ui_controller->initialize();
 		credits_screen_ui_controller->initialize();
 		level_selection_ui_controller->initialize();
+		linked_list_selection_ui_controller->initialize();
+		gameplay_ui_controller->initialize();
 	}
 
 	IUIController* UIService::getCurrentUIController()
@@ -82,14 +90,21 @@ namespace UI
 		case GameState::MAIN_MENU:
 			return main_menu_controller;
 
+		case GameState::GAMEPLAY:
+			return gameplay_ui_controller;
+
+		case GameState::LINKED_LIST_SELECTION:
+			return linked_list_selection_ui_controller;
+
+		case GameState::LEVEL_SELECTION:
+			return level_selection_ui_controller;
+
 		case GameState::INSTRUCTIONS:
 			return instructions_screen_ui_controller;
 
 		case GameState::CREDITS:
 			return credits_screen_ui_controller;
 
-		case GameState::LEVEL_SELECTION:
-			return level_selection_ui_controller;
 		default:
 			return nullptr;
 		}
@@ -102,5 +117,7 @@ namespace UI
 		delete(instructions_screen_ui_controller);
 		delete(credits_screen_ui_controller);
 		delete(level_selection_ui_controller);
+		delete(gameplay_ui_controller);
+		delete(linked_list_selection_ui_controller);
 	}
 }
